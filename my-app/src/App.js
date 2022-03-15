@@ -1,24 +1,34 @@
 import {useEffect, userEffect, useState} from 'react';
 import api from './services/api';
+import UserItem from './components/UserItem';
 
 
 export default function App() {
 
-const [user, setUser] = useState([{}])
+const [users, setUsers] = useState([{}])
 
   useEffect(() =>{
-    api.get("/users/62299d94b277fc1d9042fa8e")
-    .then((response) => setUser(response.data))
+    api.get("/users/")
+    .then((response) => setUsers(response.data))
     .catch((err) => { console.error("ERROR") });
   }, [] )
 
   return (
     <div className='App'>
-      <p>name: {user?.name}</p>
-      <p>password: {user?.password}</p>
-      <p>nickname: {user?.nickname}</p>
-      <p>nickname: {user?.nickname}</p>
-      <p>city: {user?.city}</p>
+      {
+        users.map((user) => 
+        < UserItem
+        name={user?.name} 
+        password={user?.password} 
+        nickname={user?.nickname} 
+        email={user?.email} 
+        city={user?.city} 
+      />
+        )
+
+      }
+     
+    
     </div>
   );
 }
