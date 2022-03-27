@@ -1,4 +1,5 @@
 var User = require("../models/User")
+const Auth = require("../services/auth");
 
 exports.index = async(req,res) => {
     try {
@@ -41,6 +42,8 @@ exports.create = async(req,res) =>{
       // Verificar email *(FAZER COM NAME E NICK NAME TBM)
       const user = await  User.findOne({email});
 
+      
+
       //verificar email
       if(user){
 
@@ -48,10 +51,11 @@ exports.create = async(req,res) =>{
         return res.status(422).json({message: `User ${email} already exists`})
 
       }
+      let hashPassword = await Auth.createHashPassword(password)
       //Criar usuário
       const newUser = await User.create({
         name,
-        password,
+        password:hashPassword,
         nickname,
         email,
         city

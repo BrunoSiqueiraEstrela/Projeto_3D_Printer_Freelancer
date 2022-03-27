@@ -7,13 +7,13 @@ export default function User() {
   const [user, setUser] = useState([{}])
 
   useEffect(() =>{
-    api.get("/users/")
+    api.get("/users/62299d94b277fc1d9042fa8e")
     .then((response) => setUser(response.data))
     .catch((err) => { console.error("ERROR") });
   }, [] )
 
   return (
-    <div className='App'>
+    <div className='User'>
 
       < UserItem
         name={user?.name} 

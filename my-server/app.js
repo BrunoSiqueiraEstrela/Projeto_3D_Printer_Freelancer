@@ -6,10 +6,11 @@ var cors = require('cors')
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var AuthRoutes = require('./routes/authRoute')
 var userRoutes = require('./routes/userRoute');
 const database = require("./database/index");
-
+require('dotenv-safe').config();
+const jwt = require('jsonwebtoken')
 var app = express();
 
 // view engine setup
@@ -21,6 +22,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(userRoutes);
+app.use(AuthRoutes);
 
 
 

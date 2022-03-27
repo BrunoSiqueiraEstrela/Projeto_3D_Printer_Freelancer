@@ -1,0 +1,7 @@
+.App {
+  min-height: 100vh;
+  background: rgb(74, 135, 155);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
